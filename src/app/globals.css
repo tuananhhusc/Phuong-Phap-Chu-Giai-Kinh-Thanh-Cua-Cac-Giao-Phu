@@ -1,0 +1,704 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════
+   CATHOLIC-ACADEMIC DESIGN SYSTEM
+   Phong cách học thuật & phụng vụ Công giáo
+   Tối ưu hiển thị tiếng Việt
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --color-cream: #FDFBF7;
+  --color-cream-dark: #FAF6ED;
+  --color-text: #2D2D2D;
+  --color-text-light: #5A5A5A;
+  --color-burgundy: #7B2D3B;
+  --color-burgundy-light: #A83250;
+  --color-burgundy-dark: #5A2430;
+  --color-gold: #B8860B;
+  --color-gold-light: #D4AB44;
+  --color-border: #E5DFD3;
+  --color-border-dark: #D1C9B8;
+
+  /* TOC sidebar */
+  --toc-width: 280px;
+  --content-max-width: 720px;
+  --academic-gap: 3rem;
+}
+
+/* ── Base Styles ─────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 17px;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  word-spacing: 0.02em;
+}
+
+::selection {
+  background-color: #E89AAB;
+  color: #5A2430;
+}
+
+/* ── Vietnamese-optimized text rendering ─────────────── */
+
+.article-academic {
+  font-variant-ligatures: common-ligatures;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.article-academic p {
+  text-align: justify;
+  text-justify: inter-word;
+  hanging-punctuation: first allow-end last;
+}
+
+/* ── Scrollbar Styling ───────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-dark);
+  border-radius: 4px;
+  border: 2px solid var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-burgundy);
+}
+
+/* ══════════════════════════════════════════════════════
+   ACADEMIC LAYOUT: LEFT TOC + ARTICLE
+   ══════════════════════════════════════════════════════ */
+
+.academic-layout {
+  max-width: calc(var(--toc-width) + var(--content-max-width) + var(--academic-gap) + 6rem);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.academic-layout-inner {
+  display: flex;
+  gap: var(--academic-gap);
+  justify-content: center;
+}
+
+/* ── TOC Sidebar (Left) ──────────────────────────────── */
+
+.toc-sidebar-column {
+  display: none;
+  width: var(--toc-width);
+  flex-shrink: 0;
+  order: -1; /* Ensure it's on the left */
+}
+
+@media (min-width: 1280px) {
+  .toc-sidebar-column {
+    display: block;
+  }
+}
+
+/* ── Article Column ──────────────────────────────────── */
+
+.article-column {
+  width: 100%;
+  max-width: var(--content-max-width);
+  min-width: 0;
+}
+
+/* ══════════════════════════════════════════════════════
+   TABLE OF CONTENTS - ACADEMIC STYLE
+   ══════════════════════════════════════════════════════ */
+
+.toc-desktop-wrapper {
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  padding-bottom: 2rem;
+}
+
+/* Custom scrollbar for TOC */
+.toc-desktop-wrapper::-webkit-scrollbar {
+  width: 3px;
+}
+
+.toc-desktop-wrapper::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+.toc-nav {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* TOC Header */
+.toc-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-burgundy);
+}
+
+.toc-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--color-burgundy), var(--color-burgundy-dark));
+  color: white;
+  flex-shrink: 0;
+}
+
+.toc-header-title {
+  font-family: var(--font-spectral), Georgia, serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-burgundy);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* TOC List */
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-list li {
+  margin: 0;
+  padding: 0;
+}
+
+/* TOC Links */
+.toc-link {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--color-text-light);
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  margin-left: 0;
+}
+
+.toc-link:hover {
+  color: var(--color-burgundy);
+  background-color: color-mix(in srgb, var(--color-burgundy) 4%, transparent);
+  border-left-color: var(--color-gold);
+}
+
+.toc-link.active {
+  color: var(--color-burgundy);
+  background-color: color-mix(in srgb, var(--color-burgundy) 8%, transparent);
+  border-left-color: var(--color-burgundy);
+  font-weight: 600;
+}
+
+.toc-link-h2 {
+  font-weight: 500;
+}
+
+.toc-link-h3 {
+  padding-left: 1.8rem;
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: var(--color-text-light);
+}
+
+.toc-link-h3.active {
+  color: var(--color-burgundy-light);
+  font-weight: 500;
+}
+
+/* TOC Numbering */
+.toc-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--color-cream-dark);
+  color: var(--color-burgundy);
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: all 0.2s ease;
+}
+
+.toc-link.active .toc-number {
+  background: var(--color-burgundy);
+  color: white;
+}
+
+.toc-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Drop Cap (Illuminated Manuscript Style) ─────────── */
+
+.drop-cap::first-letter,
+#article-content > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-spectral), 'Georgia', serif;
+  font-size: 4.2em;
+  line-height: 0.82;
+  padding-right: 0.12em;
+  padding-top: 0.06em;
+  color: var(--color-burgundy);
+  font-weight: 700;
+  text-shadow: 1px 1px 0px rgba(184, 134, 11, 0.25);
+}
+
+#article-content > p:first-of-type {
+  font-size: 1.125rem; /* text-lg */
+  line-height: 1.625; /* leading-relaxed */
+}
+
+/* ── Article Headings ────────────────────────────────── */
+
+.article-heading-h2 {
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.article-heading-h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-burgundy), var(--color-gold));
+  border-radius: 1px;
+}
+
+.article-heading-h3 {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.article-heading-h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  bottom: 0.25em;
+  width: 3px;
+  background: var(--color-gold);
+  border-radius: 2px;
+}
+
+/* ── Blockquote - Academic Style ─────────────────────── */
+
+.article-blockquote {
+  position: relative;
+  border-left: 4px solid var(--color-burgundy);
+  background: linear-gradient(135deg, #FAF6ED, #FDF9F2);
+  padding: 1.25em 1.75em;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5em 0;
+  font-style: italic;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.article-blockquote::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.15em;
+  left: 0.5rem;
+  font-size: 3em;
+  color: var(--color-burgundy);
+  opacity: 0.15;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* ── Decorative Divider ──────────────────────────────── */
+
+.decorative-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2.5rem 0;
+  opacity: 0.7;
+}
+
+.decorative-divider::before,
+.decorative-divider::after {
+  content: '';
+  flex: 1;
+  max-width: 100px;
+  height: 1px;
+  background: linear-gradient(
+    to var(--direction, right),
+    transparent,
+    var(--color-gold)
+  );
+}
+
+.decorative-divider::before {
+  --direction: right;
+}
+
+.decorative-divider::after {
+  --direction: left;
+}
+
+/* ── Reading Progress Bar ────────────────────────────── */
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-burgundy), var(--color-gold));
+  z-index: 100;
+  transition: width 0.1s linear;
+}
+
+/* ── Smooth Fade-in Animation ────────────────────────── */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-fade-in-delay {
+  animation: fadeInUp 0.8s ease 0.3s forwards;
+  opacity: 0;
+}
+
+/* ── Hero Ornamental Borders ─────────────────────────── */
+
+.ornamental-border {
+  position: relative;
+  border: 1px solid var(--color-border);
+  padding: 3rem 2rem;
+}
+
+.ornamental-border::before,
+.ornamental-border::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--color-gold);
+}
+
+.ornamental-border::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.ornamental-border::after {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+}
+
+.ornamental-border-bottom::before,
+.ornamental-border-bottom::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--color-gold);
+}
+
+.ornamental-border-bottom::before {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+}
+
+.ornamental-border-bottom::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+/* ── Footnote Superscript ────────────────────────────── */
+
+.footnote-ref {
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--color-burgundy);
+  font-weight: 600;
+  cursor: default;
+}
+
+/* ── Mobile Table Scroll ─────────────────────────────── */
+
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.5em 0;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+/* ── Scroll to Top Button ────────────────────────────── */
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  background: var(--color-burgundy);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(123, 45, 59, 0.3);
+  transition: all 0.3s ease;
+  z-index: 50;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-top-btn:hover {
+  background: var(--color-burgundy-dark);
+  box-shadow: 0 6px 20px rgba(123, 45, 59, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ── Mobile TOC Drawer (Left Side) ───────────────────── */
+
+.toc-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 60;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(2px);
+}
+
+.toc-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toc-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: min(320px, 85vw);
+  background: var(--color-cream);
+  z-index: 70;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  box-shadow: 8px 0 30px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem;
+}
+
+.toc-drawer.open {
+  transform: translateX(0);
+}
+
+/* ── Blockquote Citation Source ───────────────────────── */
+
+.blockquote-source {
+  display: block;
+  text-align: right;
+  font-size: 0.85em;
+  color: var(--color-text-light);
+  margin-top: 0.5em;
+  font-style: normal;
+}
+
+/* ── Reference Section ───────────────────────────────── */
+
+.references-section {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-text-light);
+}
+
+.references-section a {
+  word-break: break-all;
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE ADJUSTMENTS
+   ══════════════════════════════════════════════════════ */
+
+@media (max-width: 1279px) {
+  .academic-layout {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .academic-layout-inner {
+    justify-content: center;
+  }
+
+  .article-column {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    line-height: 1.85;
+  }
+
+  .academic-layout {
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .article-academic p {
+    text-align: left;
+  }
+
+  .drop-cap::first-letter {
+    font-size: 3.5em;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   PRINT STYLESHEET
+   ══════════════════════════════════════════════════════ */
+
+@media print {
+  .toc-sidebar-column, .toc-desktop-wrapper, #toc-mobile-toggle,
+  .toc-overlay, .toc-drawer, .scroll-top-btn, .reading-progress-container,
+  button, header { display: none !important; }
+  .academic-layout { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+  .article-column { max-width: 100% !important; }
+  body { background: white !important; color: black !important; font-size: 12pt; line-height: 1.5; }
+  h1, h2, h3, h4 { page-break-after: avoid; break-after: avoid; }
+  .article-blockquote, table, img, pre { page-break-inside: avoid; break-inside: avoid; }
+  .article-blockquote { background: transparent !important; border-left: 2px solid black !important; box-shadow: none !important; }
+}
+
+/* ══════════════════════════════════════════════════════
+   READING PREFERENCES (THEMES)
+   ══════════════════════════════════════════════════════ */
+
+/* Default (Light/Cream) is already defined in :root */
+
+/* Sepia Theme */
+[data-theme='sepia'] {
+  --color-cream: #F4ECD8;
+  --color-cream-dark: #EAE0C8;
+  --color-text: #433422;
+  --color-text-light: #705A42;
+  --color-burgundy: #7C4521;
+  --color-burgundy-light: #A35E30;
+  --color-burgundy-dark: #572F15;
+  --color-border: #DBCDB3;
+  --color-border-dark: #C4B395;
+}
+
+[data-theme='sepia'] ::selection {
+  background-color: #7C4521;
+  color: #F4ECD8;
+}
+
+/* Dark Theme */
+[data-theme='dark'] {
+  --color-cream: #1A1A1A;
+  --color-cream-dark: #242424;
+  --color-text: #E0E0E0;
+  --color-text-light: #A0A0A0;
+  --color-burgundy: #D4A373; /* Gold/Sand instead of burgundy for better contrast */
+  --color-burgundy-light: #FAEDCD;
+  --color-burgundy-dark: #CCD5AE;
+  --color-gold: #E9C46A;
+  --color-border: #333333;
+  --color-border-dark: #444444;
+}
+
+[data-theme='dark'] ::selection {
+  background-color: #D4A373;
+  color: #1A1A1A;
+}
+
+[data-theme='dark'] .toc-header-icon {
+  background: #333;
+  color: var(--color-gold);
+}
+
+[data-theme='dark'] .article-blockquote {
+  background: #242424 !important;
+}
+
+[data-theme='dark'] .toc-drawer {
+  box-shadow: 8px 0 30px rgba(0, 0, 0, 0.5);
+}
